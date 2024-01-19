@@ -15,3 +15,5 @@
 - 13강 (https://www.youtube.com/watch?v=ns-24_2P2PM)
   - 소스코드는 routes에 작성
   - layout 사용 방법
+- 14강 https://www.youtube.com/watch?v=0cBPMacdZR0
+  - 소셜 로그인, 파일 업로드, 쿠키 관련 yml작업 
