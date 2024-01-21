@@ -8,6 +8,9 @@ export interface paths {
   "/api/v1/posts": {
     get: operations["getPosts"];
   };
+  "/api/v1/posts/{id}": {
+    get: operations["getPost"];
+  };
 }
 
 export type webhooks = Record<string, never>;
@@ -15,20 +18,20 @@ export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
     GetPostsResponseBody: {
-      items?: components["schemas"]["PostDto"][];
+      items: components["schemas"]["PostDto"][];
     };
     PostDto: {
       /** Format: int64 */
-      id?: number;
+      id: number;
       /** Format: date-time */
-      createDate?: string;
+      createDate: string;
       /** Format: date-time */
-      modifyDate?: string;
+      modifyDate: string;
       /** Format: int64 */
-      authorId?: number;
-      authorName?: string;
-      title?: string;
-      body?: string;
+      authorId: number;
+      authorName: string;
+      title: string;
+      body: string;
     };
     RsDataGetPostsResponseBody: {
       resultCode: string;
@@ -36,6 +39,18 @@ export interface components {
       statusCode: number;
       msg: string;
       data: components["schemas"]["GetPostsResponseBody"];
+      success: boolean;
+      fail: boolean;
+    };
+    GetPostResponseBody: {
+      item: components["schemas"]["PostDto"];
+    };
+    RsDataGetPostResponseBody: {
+      resultCode: string;
+      /** Format: int32 */
+      statusCode: number;
+      msg: string;
+      data: components["schemas"]["GetPostResponseBody"];
       success: boolean;
       fail: boolean;
     };
@@ -59,6 +74,21 @@ export interface operations {
       200: {
         content: {
           "*/*": components["schemas"]["RsDataGetPostsResponseBody"];
+        };
+      };
+    };
+  };
+  getPost: {
+    parameters: {
+      path: {
+        id: number;
+      };
+    };
+    responses: {
+      /** @description OK */
+      200: {
+        content: {
+          "*/*": components["schemas"]["RsDataGetPostResponseBody"];
         };
       };
     };
