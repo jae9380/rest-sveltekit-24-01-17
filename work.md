@@ -38,3 +38,5 @@
   -  라이브러리 - openapi-typescript - openapi-fetch - https://github.com/drwpow/openapi-typescript/tree/main/packages/openapi-fetch
 - 22강 https://www.youtube.com/watch?v=Z7lXbq01snU
   -  백엔드 주소를 환경변수로 통합
+- 23강 https://www.youtube.com/watch?v=cfa4S4gUqLI
+  -  rq.svelte.ts 도입하여 자주 사용하는 로직 모아두기
