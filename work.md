@@ -20,4 +20,7 @@
 ---
 ### 2024-01-21
 - 15강 https://www.youtube.com/watch?v=Cp2pM0UEqv4
-  -  
+- 16강 https://www.youtube.com/watch?v=iS2WYr0ohR4
+  -  gitignore에 src/main/generated 추가 
+- 17강 https://youtu.be/VaxUxLPMRLw
+  -  initNotProd 샘플 생성 
