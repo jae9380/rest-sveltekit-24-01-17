@@ -26,3 +26,5 @@
   -  initNotProd 샘플 생성 
 - 18강 https://www.youtube.com/watch?v=VaxUxLPMRLw
   -  Get /api/v1/posts
+- 19강 https://www.youtube.com/watch?v=-wwaeYTfpLA
+  -  /p/list 작업
