@@ -17,3 +17,7 @@
   - layout 사용 방법
 - 14강 https://www.youtube.com/watch?v=0cBPMacdZR0
   - 소셜 로그인, 파일 업로드, 쿠키 관련 yml작업 
+---
+### 2024-01-21
+- 15강 https://www.youtube.com/watch?v=Cp2pM0UEqv4
+  -  
