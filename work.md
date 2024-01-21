@@ -24,3 +24,5 @@
   -  gitignore에 src/main/generated 추가 
 - 17강 https://youtu.be/VaxUxLPMRLw
   -  initNotProd 샘플 생성 
+- 18강 https://www.youtube.com/watch?v=VaxUxLPMRLw
+  -  Get /api/v1/posts
