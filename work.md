@@ -28,3 +28,8 @@
   -  Get /api/v1/posts
 - 19강 https://www.youtube.com/watch?v=-wwaeYTfpLA
   -  /p/list 작업
+- 20강 https://www.youtube.com/watch?v=DwJDutYa52U
+  -  openAPI 문서 정보를 토대로 통신 데이터와 관련된 타입스크립트를 생성 후 글 리스트에 적용
+  - 자바랑 자바 스크립트랑 클래스의 정보 API관련된 정보는 swagger에 의해서 공유가 된다.
+  - "npx openapi-typescript " + backUrl + "/v3/api-docs/apiV1 -o ./front/src/lib/types/api/v1/schema.d.ts"
+  - 위 코드를 통하여 변환을 해준다
