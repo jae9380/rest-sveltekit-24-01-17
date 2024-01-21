@@ -17,6 +17,16 @@ export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
+    Empty: Record<string, never>;
+    RsDataEmpty: {
+      resultCode: string;
+      /** Format: int32 */
+      statusCode: number;
+      msg: string;
+      data: components["schemas"]["Empty"];
+      success: boolean;
+      fail: boolean;
+    };
     GetPostsResponseBody: {
       items: components["schemas"]["PostDto"][];
     };
@@ -76,6 +86,12 @@ export interface operations {
           "*/*": components["schemas"]["RsDataGetPostsResponseBody"];
         };
       };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "*/*": components["schemas"]["RsDataEmpty"];
+        };
+      };
     };
   };
   getPost: {
@@ -89,6 +105,12 @@ export interface operations {
       200: {
         content: {
           "*/*": components["schemas"]["RsDataGetPostResponseBody"];
+        };
+      };
+      /** @description Internal Server Error */
+      500: {
+        content: {
+          "*/*": components["schemas"]["RsDataEmpty"];
         };
       };
     };

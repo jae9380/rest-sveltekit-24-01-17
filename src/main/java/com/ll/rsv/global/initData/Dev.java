@@ -15,7 +15,6 @@ import org.springframework.core.annotation.Order;
 public class Dev {
     @Bean
     @Order(4)
-    // 실행 시 자동으로 변환하게 만듬
     ApplicationRunner initDev() {
         return args -> {
             String backUrl = AppConfig.getSiteBackUrl();

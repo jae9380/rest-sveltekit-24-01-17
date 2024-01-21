@@ -3,10 +3,8 @@ package com.ll.rsv.domain.member.member.entity;
 import com.ll.rsv.global.jpa.entity.BaseTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Transient;
 import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -22,7 +20,6 @@ import static lombok.AccessLevel.PROTECTED;
 @Builder
 @Getter
 @Setter
-@EntityListeners(AuditingEntityListener.class)
 public class Member extends BaseTime {
     @Column(unique = true)
     private String username;

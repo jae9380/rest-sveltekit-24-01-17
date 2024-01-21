@@ -40,3 +40,130 @@
   -  백엔드 주소를 환경변수로 통합
 - 23강 https://www.youtube.com/watch?v=cfa4S4gUqLI
   -  rq.svelte.ts 도입하여 자주 사용하는 로직 모아두기
+- 24강 https://www.youtube.com/watch?v=0eTTkCl03hE
+  -  글 상세보기 
+- 25강
+<details>
+<summary>작업 1 : findById(id) 예외처리 코드를 단순화</summary>
+<div markdown="1">
+
+기존 코드(src/main/java/com/ll/rsv/domain/post/post/controller/ApiV1PostController.java)   
+```java
+Post post = postService.findById(id).orElseThrow(() -> new GlobalException("404-1", "존재하지 않는 글입니다."));
+```   
+새 코드(src/main/java/com/ll/rsv/domain/post/post/controller/ApiV1PostController.java)   
+```java
+Post post = postService.findById(id).orElseThrow(GlobalException.E404::new); // 기존 코드가 너무 길어서 이렇게 줄임
+ ```
+</div>
+</details>
+
+<details>
+<summary>작업 2 : 예외발생시 출력되는 JSON의 내용을 커스터마이징</summary>
+<div markdown="2">
+
+새 코드(src/main/java/com/ll/rsv/global/exceptionHandlers/GlobalExceptionHandler.java)   
+```java
+package com.ll.rsv.global.exceptionHandlers;
+
+import com.ll.rsv.global.exceptions.GlobalException;
+import com.ll.rsv.global.rq.Rq;
+import com.ll.rsv.global.rsData.RsData;
+import com.ll.rsv.standard.base.Empty;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+@ControllerAdvice
+@RequiredArgsConstructor
+public class GlobalExceptionHandler {
+  private final Rq rq;
+
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<Object> handleException(Exception ex) {
+    // 아래 `throw ex;` 코드는 API 요청이 아닌 경우에만 실행된다.
+    // if (rq.isApi()) throw ex; // 어짜피 이 서버(스프링부트)를 API서버로만 이용할 것이므로 이 코드는 필요 없다.
+
+    return handleApiException(ex);
+  }
+
+  // 자연스럽게 발생시킨 예외처리
+  private ResponseEntity<Object> handleApiException(Exception ex) {
+    Map<String, Object> body = new LinkedHashMap<>();
+    body.put("resultCode", "500-1");
+    body.put("statusCode", 500);
+    body.put("msg", ex.getLocalizedMessage());
+
+    LinkedHashMap<String, Object> data = new LinkedHashMap<>();
+    body.put("data", data);
+
+    StringWriter sw = new StringWriter();
+    PrintWriter pw = new PrintWriter(sw);
+    ex.printStackTrace(pw);
+    data.put("trace", sw.toString().replace("\t", "    ").split("\\r\\n"));
+
+    String path = rq.getCurrentUrlPath();
+    data.put("path", path);
+
+    body.put("success", false);
+    body.put("fail", true);
+
+    return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  // 개발자가 명시적으로 발생시킨 예외처리
+  @ExceptionHandler(GlobalException.class)
+  @ResponseStatus // 참고로 이 코드의 역할은 error 내용의 스키마를 타입스크립트화 하는데 있다.
+  public ResponseEntity<RsData<Empty>> handle(GlobalException ex) {
+    HttpStatus status = HttpStatus.valueOf(ex.getRsData().getStatusCode());
+    rq.setStatusCode(ex.getRsData().getStatusCode());
+
+    return new ResponseEntity<>(ex.getRsData(), status);
+  }
+}
+```
+</div>
+</details>
+
+<details>
+<summary>작업 3 : 글 상세보기 페이지 구현</summary>
+<div markdown="3">
+
+새 코드(front/src/routes/p/[id]/+page.svelte)
+```javascript
+<script lang="ts">
+  import { page } from '$app/stores';
+  import rq from '$lib/rq/rq.svelte';
+
+  async function load() {
+    const { data, error } = await rq
+      .apiEndPoints()
+      .GET('/api/v1/posts/{id}', { params: { path: { id: parseInt($page.params.id) } } });
+
+    // 이 코드가 실행되면 아래에 `{:catch error}` 부분으로 넘어감
+    if (error) throw error;
+
+    return data!;
+  }
+</script>
+
+{#await load()}
+  <div>loading...</div>
+{:then { data: { item: post } }}
+  <h1>{post.title}</h1>
+  <div class="whitespace-pre-line">{post.body}</div>
+{:catch error}
+  <!-- .msg 로 접근할 수 있는 이유는 스프링부트의 에러관련 출력을 커스터마이징 했기 때문 -->
+  {error.msg}
+{/await}
+```
+</div>
+</details>

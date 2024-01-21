@@ -2,7 +2,7 @@ package com.ll.rsv.domain.post.post.dto;
 
 import com.ll.rsv.domain.post.post.entity.Post;
 import lombok.Getter;
-import lombok.NonNull;
+import org.springframework.lang.NonNull;
 
 import java.time.LocalDateTime;
 

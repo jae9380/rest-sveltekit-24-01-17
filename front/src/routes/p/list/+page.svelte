@@ -1,25 +1,22 @@
 <script lang="ts">
-	import createClient from 'openapi-fetch';
-	import type { paths } from '$lib/types/api/v1/schema';
+  import rq from '$lib/rq/rq.svelte';
 
-	const { GET } = createClient<paths>({ baseUrl: import.meta.env.VITE_CORE_API_BASE_URL });
+  async function load() {
+    const { data } = await rq.apiEndPoints().GET('/api/v1/posts', {});
 
-	async function load() {
-		const { data } = await GET('/api/v1/posts', {});
-
-		return data!;
-	}
+    return data!;
+  }
 </script>
 
 {#await load()}
-	<p>loading...</p>
+  <p>loading...</p>
 {:then { data: { items: posts } }}
-	<h1>글 리스트</h1>
-	<ul>
-		{#each posts as post}
-			<li>
-				<a href="/p/{post.id}">{post.title}</a>
-			</li>
-		{/each}
-	</ul>
+  <h1>글 리스트</h1>
+  <ul>
+    {#each posts as post}
+      <li>
+        <a href="/p/{post.id}">{post.title}</a>
+      </li>
+    {/each}
+  </ul>
 {/await}
