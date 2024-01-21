@@ -36,3 +36,5 @@
 - 21강 https://www.youtube.com/watch?v=ttph4UKuhzs
   -  openapi-fetch 를 사용해서 fetch를 더 편하게
   -  라이브러리 - openapi-typescript - openapi-fetch - https://github.com/drwpow/openapi-typescript/tree/main/packages/openapi-fetch
+- 22강 https://www.youtube.com/watch?v=Z7lXbq01snU
+  -  백엔드 주소를 환경변수로 통합
