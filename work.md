@@ -33,3 +33,6 @@
   - 자바랑 자바 스크립트랑 클래스의 정보 API관련된 정보는 swagger에 의해서 공유가 된다.
   - "npx openapi-typescript " + backUrl + "/v3/api-docs/apiV1 -o ./front/src/lib/types/api/v1/schema.d.ts"
   - 위 코드를 통하여 변환을 해준다
+- 21강 https://www.youtube.com/watch?v=ttph4UKuhzs
+  -  openapi-fetch 를 사용해서 fetch를 더 편하게
+  -  라이브러리 - openapi-typescript - openapi-fetch - https://github.com/drwpow/openapi-typescript/tree/main/packages/openapi-fetch
