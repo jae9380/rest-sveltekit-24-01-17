@@ -174,3 +174,5 @@ public class GlobalExceptionHandler {
   - 글 수정기능 구현
 - 27강 https://www.youtube.com/watch?v=ejPoS8M8f4g
   - 글 수정 후 메세지와 redirect
+- 28강 https://www.youtube.com/watch?v=PpwtevXexWA
+  - 글 수정 시 공개여부도 같이 편집하도록 체크박스 도입
