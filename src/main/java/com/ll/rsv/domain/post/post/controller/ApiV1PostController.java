@@ -66,6 +66,7 @@ public class ApiV1PostController {
         postService.edit(post, requestBody.title, requestBody.body);
 
         return RsData.of(
+                "%d번 글이 수정되었습니다.".formatted(id),
                 new EditResponseBody(new PostDto(post))
         );
     }

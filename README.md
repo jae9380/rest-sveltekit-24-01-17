@@ -172,3 +172,5 @@ public class GlobalExceptionHandler {
 ### 2024-01-29
 - 26강 https://www.youtube.com/watch?v=cO0MH2iFzwU
   - 글 수정기능 구현
+- 27강 https://www.youtube.com/watch?v=ejPoS8M8f4g
+  - 글 수정 후 메세지와 redirect
