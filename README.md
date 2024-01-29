@@ -223,6 +223,7 @@ const { data, error } = await rq.apiEndPoints().POST('/api/v1/members/login', {
 // 응답의 바디는 정리되어 들어가지만 헤더는 보이지 않는다.
 // 헤더 안에 쿠키가 들어가있다.
 ```
-
+- 31강 https://www.youtube.com/watch?v=Vd7-duNm6V0
+  - 로그인 성공하면 rq.member객체 필드들에 값을 채워넣기
 </div>
 </details>
