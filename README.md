@@ -1,4 +1,10 @@
 ### 2024-01-18
+
+<details>
+<summary> 7강 ~ 11강 </summary>
+<div markdown="1">
+
+
 - 7강 폰트작업
 - 8강 프론트엔드 프레임워크 문법 비교
    - https://component-party.dev/ 
@@ -8,8 +14,17 @@
   - 스벨트킷 - 문서 - https://kit.svelte.dev/docs
   - 스벨트킷2 (스벨트5)기준으로 알려줘~ 이런 방식으로 gpt사용 권장
 - 11강 
+
+</div>
+</details>
+
 ---
 ### 2024-01-19
+
+<details>
+<summary> 12강 ~ 14강 </summary>
+<div markdown="2">
+
 - 12강
   - 포메터 설정
 - 13강 (https://www.youtube.com/watch?v=ns-24_2P2PM)
@@ -17,8 +32,17 @@
   - layout 사용 방법
 - 14강 https://www.youtube.com/watch?v=0cBPMacdZR0
   - 소셜 로그인, 파일 업로드, 쿠키 관련 yml작업 
+
+</div>
+</details>
+
 ---
 ### 2024-01-21
+
+<details>
+<summary> 15강 ~ 25강 </summary>
+<div markdown="3">
+
 - 15강 https://www.youtube.com/watch?v=Cp2pM0UEqv4
 - 16강 https://www.youtube.com/watch?v=iS2WYr0ohR4
   -  gitignore에 src/main/generated 추가 
@@ -168,8 +192,16 @@ public class GlobalExceptionHandler {
 </div>
 </details>
 
+</div>
+</details>
+
 ----
 ### 2024-01-29
+
+<details>
+<summary> 26강 ~ </summary>
+<div markdown="3">
+
 - 26강 https://www.youtube.com/watch?v=cO0MH2iFzwU
   - 글 수정기능 구현
 - 27강 https://www.youtube.com/watch?v=ejPoS8M8f4g
@@ -178,3 +210,19 @@ public class GlobalExceptionHandler {
   - 글 수정 시 공개여부도 같이 편집하도록 체크박스 도입
 - 29강 https://www.youtube.com/watch?v=qBVXwbaGYsc
   - 로그인 폼 처리
+- 30강 https://www.youtube.com/watch?v=HFRbVAKFmT8
+  - 로그인 폼 구현, 성공 시 코드상에 보이지 않는 쿠기 2개 브라우저에 저장
+  - 요청에 헤더와 바디 / 응답에 헤더와 바디가 존재
+```javascript
+const { data, error } = await rq.apiEndPoints().POST('/api/v1/members/login', {
+      body: {
+        username: form.username.value,
+        password: form.password.value
+      }
+    });
+// 응답의 바디는 정리되어 들어가지만 헤더는 보이지 않는다.
+// 헤더 안에 쿠키가 들어가있다.
+```
+
+</div>
+</details>
