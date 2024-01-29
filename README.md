@@ -167,3 +167,8 @@ public class GlobalExceptionHandler {
 ```
 </div>
 </details>
+
+----
+### 2024-01-29
+- 26강 https://www.youtube.com/watch?v=cO0MH2iFzwU
+  - 글 수정기능 구현
