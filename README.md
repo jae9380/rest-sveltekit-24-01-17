@@ -225,5 +225,39 @@ const { data, error } = await rq.apiEndPoints().POST('/api/v1/members/login', {
 ```
 - 31강 https://www.youtube.com/watch?v=Vd7-duNm6V0
   - 로그인 성공하면 rq.member객체 필드들에 값을 채워넣기
+- 32-1강 https://www.youtube.com/watch?v=OYxL5tKd6Xg
+  - 브라우저 리프레시에도 로그인 유지...
+  - 네이버는 전체를 다시 갖고오지만,
+  - 스벨트킷은 네이버와 달리 필요한 부분만 다시 갖고온다.
+  - 그렇기 때문에 스벨트킷에서의 페이지 이동은 자바스크립트를 유지한다.
+- 32-2강 https://www.youtube.com/watch?v=vMnqEiVQLVA
+  - 사용자가 url로 다시 접속하거나 F5를 누르면 rq에 정보가 사라진다.
+  - 로그인의 조건 
+      1. 올바른 쿠키 (2개)
+      2. rq.member에 값이 채워져야 한다.
+  - 페이지를 새로 연결 시 쿠키는 있는데 rq.member에 값이 없다.
+  - 그렇기 때문에 서버 api는 2개가 있어야 한다.
+  - 하나는 쿠키를 굽는 동시에 회원 정보를 rq에 담아야 하고, 다른 하나는 현재 회원 정보를 rq에 담아줘야 한다.
+    - POST /member/v1/member/login : 1. 쿠키 굽기, 2. 해당하는 회원 정보를 리턴 => rq.member (javascript)
+    - GET /member/v1/member/me : 1. 현재 회원 정보 리턴 => rq.member
+
+```javascript
+// +layout.svelte
+onMount(() => {
+  rq.initAuth();
+});
+// layout이 최초 실행 시 initAuth() 실행
+
+// +rq.svelte.ts
+public async initAuth() {
+  const { data } = await this.apiEndPoints().GET('/api/v1/members/me');
+    // 비로그인 시 해당 GET은 요청이 불가능 -> securityConfig에 설정
+    // 쿠키는 갖고 있지만 rq.member에 정보가 없을 경우 GET요청 그리고 밑 if문 발동
+  if (data) {
+    this.setLogined(data.data.item);
+  }
+}
+```
+
 </div>
 </details>

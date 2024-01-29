@@ -5,14 +5,12 @@ import com.ll.rsv.domain.member.member.dto.MemberDto;
 import com.ll.rsv.domain.member.member.service.MemberService;
 import com.ll.rsv.global.rq.Rq;
 import com.ll.rsv.global.rsData.RsData;
+import com.ll.rsv.standard.base.Empty;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/members")
@@ -42,5 +40,25 @@ public class ApiV1MemberController {
                         new MemberDto(authAndMakeTokensRs.getData().member())
                 )
         );
+    }
+
+
+    public record MeResponseBody(@NonNull MemberDto item) {
+    }
+
+    @GetMapping("/me")
+    public RsData<MeResponseBody> getMe() {
+        return RsData.of(
+                new MeResponseBody(
+                        new MemberDto(rq.getMember())
+                )
+        );
+    }
+
+    @PostMapping("/logout")
+    public RsData<Empty> logout() {
+        rq.setLogout();
+
+        return RsData.of("200", "로그아웃 성공");
     }
 }
