@@ -21,6 +21,9 @@ public class RsData<T> {
     @NonNull
     T data;
 
+    public static RsData<Empty> of(String msg) {
+        return of("200-1", msg, new Empty());
+    }
     public static <T> RsData<T> of(T data) {
         return of("200-1", "성공", data);
     }

@@ -12,6 +12,10 @@ public class GlobalException extends RuntimeException {
         this("400-0", "에러");
     }
 
+    public GlobalException(String msg) {
+        this("400-0", msg);
+    }
+
     public GlobalException(String resultCode, String msg) {
         super("resultCode=" + resultCode + ",msg=" + msg);
         this.rsData = RsData.of(resultCode, msg);

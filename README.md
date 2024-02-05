@@ -272,7 +272,9 @@ public async initAuth() {
 - 33강 https://www.youtube.com/watch?v=E3-vH_5Myqo
   - 작성자, 관리자 비공개글 열람 가능, 작성자만 수정 가능
 - 34강 https://www.youtube.com/watch?v=FKMdaGLCNyI
-  - 멤버 별 글 수정및 삭제 가능한지 
-
+  - 멤버 별 글 수정및 삭제 가능한지
+- 35강 https://www.youtube.com/watch?v=Ua9XSj-hv_4
+  - 글 삭제 후 페이지 단위로 리고드
+  - rq.reload();를 수행하면 page 단위로 재실행 되도록 파일 생성
 </div>
 </details>
