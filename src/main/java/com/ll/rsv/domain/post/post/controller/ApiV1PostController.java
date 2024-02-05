@@ -4,6 +4,7 @@ import com.ll.rsv.domain.post.post.dto.PostDto;
 import com.ll.rsv.domain.post.post.entity.Post;
 import com.ll.rsv.domain.post.post.service.PostService;
 import com.ll.rsv.global.exceptions.GlobalException;
+import com.ll.rsv.global.rq.Rq;
 import com.ll.rsv.global.rsData.RsData;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -19,9 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ApiV1PostController {
     private final PostService postService;
+    private final Rq rq;
 
 
-    public record GetPostsResponseBody(@NonNull List<PostDto> items) {}
+    public record GetPostsResponseBody(@NonNull List<PostDto> items) {
+    }
 
     @GetMapping("")
     public RsData<GetPostsResponseBody> getPosts() {
@@ -36,6 +39,7 @@ public class ApiV1PostController {
         );
     }
 
+
     public record GetPostResponseBody(@NonNull PostDto item) {
     }
 
@@ -44,6 +48,9 @@ public class ApiV1PostController {
             @PathVariable long id
     ) {
         Post post = postService.findById(id).orElseThrow(GlobalException.E404::new);
+
+        if (!postService.canRead(rq.getMember(), post))
+            throw new GlobalException("403-1", "권한이 없습니다.");
 
         return RsData.of(
                 new GetPostResponseBody(new PostDto(post))
@@ -63,6 +70,9 @@ public class ApiV1PostController {
             @Valid @RequestBody EditRequestBody requestBody
     ) {
         Post post = postService.findById(id).orElseThrow(GlobalException.E404::new);
+
+        if (!postService.canEdit(rq.getMember(), post))
+            throw new GlobalException("403-1", "권한이 없습니다.");
 
         postService.edit(post, requestBody.title, requestBody.body, requestBody.published);
 

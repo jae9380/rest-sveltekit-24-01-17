@@ -199,7 +199,7 @@ public class GlobalExceptionHandler {
 ### 2024-01-29
 
 <details>
-<summary> 26강 ~ </summary>
+<summary> 26강 ~ 32강 </summary>
 <div markdown="3">
 
 - 26강 https://www.youtube.com/watch?v=cO0MH2iFzwU
@@ -258,6 +258,19 @@ public async initAuth() {
   }
 }
 ```
+
+</div>
+</details>
+
+---
+### 2023-02-05
+
+<details>
+<summary> 33강 ~  </summary>
+<div markdown="4">
+
+- 33강 https://www.youtube.com/watch?v=E3-vH_5Myqo
+  - 작성자, 관리자 비공개글 열람 가능, 작성자만 수정 가능
 
 </div>
 </details>
