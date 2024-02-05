@@ -14,6 +14,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1/posts")
@@ -29,12 +30,19 @@ public class ApiV1PostController {
     @GetMapping("")
     public RsData<GetPostsResponseBody> getPosts() {
         List<Post> items = postService.findByPublished(true);
+        List<PostDto> _items = items.stream()
+                .map(post -> {
+                    PostDto postDto = new PostDto(post);
+                    postDto.setActorCanRead(postService.canRead(rq.getMember(), post));
+                    postDto.setActorCanEdit(postService.canEdit(rq.getMember(), post));
+                    postDto.setActorCanDelete(postService.canDelete(rq.getMember(), post));
+                    return postDto;
+                })
+                .collect(Collectors.toList());
 
         return RsData.of(
                 new GetPostsResponseBody(
-                        items.stream()
-                                .map(PostDto::new)
-                                .toList()
+                        _items
                 )
         );
     }
@@ -52,8 +60,13 @@ public class ApiV1PostController {
         if (!postService.canRead(rq.getMember(), post))
             throw new GlobalException("403-1", "권한이 없습니다.");
 
+        PostDto postDto = new PostDto(post);
+        postDto.setActorCanRead(postService.canRead(rq.getMember(), post));
+        postDto.setActorCanEdit(postService.canEdit(rq.getMember(), post));
+        postDto.setActorCanDelete(postService.canDelete(rq.getMember(), post));
+
         return RsData.of(
-                new GetPostResponseBody(new PostDto(post))
+                new GetPostResponseBody(postDto)
         );
     }
 
