@@ -59,6 +59,6 @@ public class ApiV1MemberController {
     public RsData<Empty> logout() {
         rq.setLogout();
 
-        return RsData.of("200", "로그아웃 성공");
+        return RsData.of("로그아웃 성공");
     }
 }

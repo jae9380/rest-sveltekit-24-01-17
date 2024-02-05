@@ -276,5 +276,7 @@ public async initAuth() {
 - 35강 https://www.youtube.com/watch?v=Ua9XSj-hv_4
   - 글 삭제 후 페이지 단위로 리고드
   - rq.reload();를 수행하면 page 단위로 재실행 되도록 파일 생성
+- 36강 https://www.youtube.com/watch?v=eAx28s3eBd4
+  - RsData.of 메소드 오버로딩
 </div>
 </details>
