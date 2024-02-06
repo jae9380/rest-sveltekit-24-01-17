@@ -266,7 +266,7 @@ public async initAuth() {
 ### 2023-02-05
 
 <details>
-<summary> 33강 ~  </summary>
+<summary> 33강 ~ 36강 </summary>
 <div markdown="4">
 
 - 33강 https://www.youtube.com/watch?v=E3-vH_5Myqo
@@ -278,5 +278,20 @@ public async initAuth() {
   - rq.reload();를 수행하면 page 단위로 재실행 되도록 파일 생성
 - 36강 https://www.youtube.com/watch?v=eAx28s3eBd4
   - RsData.of 메소드 오버로딩
+</div>
+</details>
+
+---
+### 2023-02-06
+
+<details>
+<summary> 37강 ~  </summary>
+<div markdown="5">
+
+- 37강 https://www.youtube.com/watch?v=oWEifPOX_Wk
+  - Post Entity에서 Body를 PostDetail로 분할 및 DTO 나누기
+  - open-in-view: false 설정
+  - 
+
 </div>
 </details>
